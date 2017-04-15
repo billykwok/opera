@@ -2,74 +2,81 @@ const path = require('path');
 const webpack = require('webpack');
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
+const HOST = 'localhost';
+const PORT = 3000;
 
 const config = {
   devtool: 'hidden-source-map',
   entry: IS_DEV
     ? [
-        'react-hot-loader/patch',
-        'webpack-hot-middleware/client',
-        './src/client.jsx',
-      ]
-    : './src/client.jsx',
+      'react-hot-loader/patch',
+      `webpack-dev-server/client?http://${HOST}:${PORT}`,
+      'webpack/hot/only-dev-server',
+      path.join(__dirname, './src/index.jsx')
+    ]
+    : [path.join(__dirname, './src/index.jsx')],
   output: {
-    path: path.join(__dirname, 'dist/public'),
+    path: path.join(__dirname, 'docs/public'),
     filename: 'bundle.js',
-    publicPath: '/static/',
+    publicPath: '/opera/public'
   },
   resolve: {
-    alias: {
-      Common: path.resolve(__dirname, 'src/component/Common'),
-    },
     modules: ['src', 'node_modules'],
-    extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
+    extensions: ['.js', '.json', '.jsx', '.css', '.scss']
   },
   module: {
     rules: [
       {
         test: /\.(jpe?g|png|gif)$/i,
-        exclude: [/\.dataurl\.png$/i],
-        include: [path.join(__dirname, IS_DEV ? '../src' : 'src')],
+        exclude: /node_modules/,
+        include: [path.join(__dirname, 'src')],
         use: [
-          {loader: 'file-loader', query: {name: 'images/[name].[ext]'}},
-          {loader: 'img-loader', query: {optimizationLevel: 5}},
-        ],
+          { loader: 'file-loader', query: { name: 'images/[name].[ext]' } },
+          { loader: 'img-loader', query: { optimizationLevel: 5 } }
+        ]
       },
       {
         test: /\.jsx?$/i,
-        include: [path.join(__dirname, IS_DEV ? '../src' : 'src')],
-        use: ['babel-loader?cacheDirectory'],
-      },
-    ],
+        exclude: /node_modules/,
+        include: [path.join(__dirname, 'src')],
+        use: ['babel-loader']
+      }
+    ]
   },
   plugins: [
     new webpack.DefinePlugin(
       Object.assign(
         {},
         {
-          'process.env': {NODE_ENV: JSON.stringify(process.env.NODE_ENV)},
-          'typeof window': JSON.stringify('object'),
+          'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) },
+          'typeof window': JSON.stringify('object')
         },
-        IS_DEV ? {} : {'module.hot': false},
-      ),
-    ),
+        IS_DEV ? {} : { 'module.hot': false }
+      )
+    )
   ],
-  watch: IS_DEV,
-  watchOptions: {
-    ignored: [/node_modules/i, /dist/i],
-    aggregateTimeout: 1000,
-    poll: 3000,
-  },
-  target: 'web',
+  devServer: {
+    contentBase: path.join(__dirname, 'docs'),
+    host: HOST,
+    port: PORT,
+    proxy: {
+      '/opera': {
+        target: 'http://localhost:3000',
+        pathRewrite: { '^/opera': '' }
+      }
+    },
+    historyApiFallback: true,
+    compress: true,
+    hot: true // Enable HMR on the server
+  }
 };
 
 if (IS_DEV) {
   config.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(), // Enable HMR globally
+    new webpack.NamedModulesPlugin(), // Prints more readable module names
+    new webpack.NoEmitOnErrorsPlugin() // Do not emit assets that include errors
   );
-  config.performance = false;
 } else {
   config.plugins.push(new webpack.optimize.AggressiveMergingPlugin());
 }

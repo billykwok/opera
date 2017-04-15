@@ -19,14 +19,6 @@
     "production": {
       "presets": ["babili"],
       "plugins": [
-        [
-          "react-css-modules", {
-            "generateScopedName": "[hash:base64:8]",
-            "filetypes": {
-              ".scss": "postcss-scss"
-            }
-          }
-        ],
         "transform-react-constant-elements",
         "transform-react-inline-elements",
         "transform-react-remove-prop-types",
@@ -36,19 +28,8 @@
     "development": {
       "plugins": [
         "react-hot-loader/babel",
-        "flow-react-proptypes",
-        [
-          "react-css-modules", {
-            "generateScopedName": "[path]___[name]__[local]___[hash:base64:5]",
-            "filetypes": {
-              ".scss": "postcss-scss"
-            }
-          }
-        ]
+        "flow-react-proptypes"
       ]
-    },
-    "test": {
-      "plugins": ["rewire"]
     }
   }
 }
