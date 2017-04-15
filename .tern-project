@@ -1,0 +1,9 @@
+{
+  "ecmaVersion": 7,
+  "libs": [
+    "browser"
+  ],
+  "loadEagerly": [
+    "./src/js/**/*.{js,jsx}"
+  ]
+}

@@ -1,0 +1,21 @@
+$map: (
+  xs: (max-width: 367px),
+  sm: (min-width: 368px, max-width: 463px),
+  md: (min-width: 464px, max-width: 671px),
+  lg: (min-width: 672px, max-width: 1023px),
+  xl: (min-width: 1024px)
+);
+
+@mixin device($device-list) {
+  @each $device in $device-list {
+    @if map-has-key($map, $device) {
+      $bkpts: map-get($map, $device);
+      @if !map-has-key($bkpts, max) {
+        @media () {
+
+        }
+      }
+
+    }
+  }
+}

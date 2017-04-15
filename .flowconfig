@@ -1,0 +1,10 @@
+[ignore]
+.*/build
+.*/config
+
+[include]
+
+[libs]
+
+[options]
+module.name_mapper.extension='scss' -> './index.jsx'

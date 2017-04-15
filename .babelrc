@@ -1,0 +1,54 @@
+{
+  "presets": [
+    ["latest", { "loose": true, "modules": false }],
+    "react",
+    "stage-0",
+    ["env", {
+      "targets": {
+        "browsers": ["last 3 versions", "> 1%"],
+        "ie": 9,
+        "safari": 7
+      }
+    }]
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-class-properties"
+  ],
+  "env": {
+    "production": {
+      "presets": ["babili"],
+      "plugins": [
+        [
+          "react-css-modules", {
+            "generateScopedName": "[hash:base64:8]",
+            "filetypes": {
+              ".scss": "postcss-scss"
+            }
+          }
+        ],
+        "transform-react-constant-elements",
+        "transform-react-inline-elements",
+        "transform-react-remove-prop-types",
+        "transform-react-pure-class-to-function"
+      ]
+    },
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel",
+        "flow-react-proptypes",
+        [
+          "react-css-modules", {
+            "generateScopedName": "[path]___[name]__[local]___[hash:base64:5]",
+            "filetypes": {
+              ".scss": "postcss-scss"
+            }
+          }
+        ]
+      ]
+    },
+    "test": {
+      "plugins": ["rewire"]
+    }
+  }
+}

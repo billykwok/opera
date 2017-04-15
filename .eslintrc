@@ -1,0 +1,89 @@
+{
+  "env": {
+    "worker": true,
+    "commonjs": true,
+    "amd": true,
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "shared-node-browser": true
+  },
+  "plugins": ["babel", "flowtype", "react"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "settings": {
+    "flowtype": { "onlyFilesWithFlowAnnotation": true }
+  },
+  "extends": ["airbnb", "plugin:flowtype/recommended"],
+  "rules": {
+    "react/require-default-props": 0,
+    "import/no-extraneous-dependencies": [0, {
+      "devDependencies": true,
+      "optionalDependencies": true,
+      "peerDependencies": true
+    }],
+    "react/sort-comp": [1, {
+      "order": [
+        "type-annotations",
+        "static-methods",
+        "lifecycle",
+        "everything-else",
+        "render"
+      ],
+      "groups": {
+        "lifecycle": [
+          "displayName",
+          "propTypes",
+          "contextTypes",
+          "childContextTypes",
+          "mixins",
+          "statics",
+          "defaultProps",
+          "constructor",
+          "getDefaultProps",
+          "getInitialState",
+          "state",
+          "getChildContext",
+          "componentWillMount",
+          "componentDidMount",
+          "componentWillReceiveProps",
+          "shouldComponentUpdate",
+          "componentWillUpdate",
+          "componentDidUpdate",
+          "componentWillUnmount"
+        ]
+      }
+    }],
+    "comma-dangle": ["error", "never"],
+    "space-before-function-paren": [2, "never"],
+    "consistent-return": 0,
+    "no-mixed-operators": ["error",
+      {
+        "groups": [
+          ["&", "|", "^", "~", "<<", ">>", ">>>"],
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
+        ],
+        "allowSamePrecedence": true
+      }
+    ],
+    "max-len": [2, 80, 2, {
+      "ignoreUrls": true,
+      "ignoreComments": false
+    }],
+    "indent": ["error", 2, {
+      "SwitchCase": 1,
+      "VariableDeclarator": { "var": 2, "let": 2, "const": 3 },
+      "ObjectExpression": 1
+    }]
+  }
+}

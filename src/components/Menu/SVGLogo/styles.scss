@@ -1,0 +1,21 @@
+.SVGLogo {
+  width: 4rem;
+  height: 4rem;
+  background-color: #354961;
+  @media (min-width: 23rem) and (max-width: 28.9375rem) {
+    width: 5rem;
+    height: 5rem;
+  }
+  @media (min-width: 29rem) and (max-width: 41.9375rem) {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+  @media (min-width: 42rem) and (max-width: 63.9375rem) {
+    width: 6rem;
+    height: 6rem;
+  }
+  @media (min-width: 64rem) {
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+}

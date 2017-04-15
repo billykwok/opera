@@ -1,0 +1,13 @@
+@import "bootstrap/mixins";
+
+.InteractionReminder {
+  position: absolute;
+  width: 200px;
+  height: 18px;
+  right: 0.5rem;
+  bottom: 0.75rem;
+  display: none;
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
+}

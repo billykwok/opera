@@ -1,0 +1,21 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [ "stylelint-scss" ],
+  "rules": {
+    "selector-pseudo-class-no-unknown": [
+      true,
+      { "ignorePseudoClasses": ["global", "local"] }
+    ],
+    "property-no-unknown": [true, { "ignoreProperties": ["composes"] }],
+    "declaration-block-no-duplicate-properties": [true, { "ignoreProperties": ["composes"] }],
+    "rule-nested-empty-line-before": null,
+    "selector-list-comma-newline-after": null,
+    "function-comma-space-after": null,
+    "declaration-bang-space-before": null,
+    "block-closing-brace-newline-after": null,
+    "max-empty-lines": null,
+    "at-rule-empty-line-before": null,
+    "number-leading-zero": null,
+    "selector-type-no-unknown": [ true, { "ignoreTypes": ["-active"] } ]
+  }
+}
