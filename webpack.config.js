@@ -27,15 +27,6 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(jpe?g|png|gif)$/i,
-        exclude: /node_modules/,
-        include: [path.join(__dirname, 'src')],
-        use: [
-          { loader: 'file-loader', query: { name: 'images/[name].[ext]' } },
-          { loader: 'img-loader', query: { optimizationLevel: 5 } }
-        ]
-      },
-      {
         test: /\.jsx?$/i,
         exclude: /node_modules/,
         include: [path.join(__dirname, 'src')],
