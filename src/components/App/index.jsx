@@ -16,6 +16,7 @@ const InputContainer = styled.div`
 
 const TextArea = styled(AutosizeTextArea)`
   padding: 0.5rem;
+  box-sizing: border-box;
   width: 100%;
   max-width: 40rem;
   font-size: 1rem;
@@ -23,6 +24,7 @@ const TextArea = styled(AutosizeTextArea)`
 
 const Layout = styled.div`
   background-color: #213753;
+  width: 100%;
 `;
 
 const App = (): React.Element<any> => (

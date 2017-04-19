@@ -10,6 +10,8 @@
  */
 
 html {
+  width: 100%;
+  min-width: 320px;
   line-height: 1.15; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -17,7 +19,10 @@ html {
 }
 
 body {
+  width: 100%;
+  min-width: 320px;
   margin: 0;
+  background-color: #f4f4f4;
 }
 
 /* Sections
