@@ -1,7 +1,7 @@
-export function updateWindowSize(windowWidth, windowheight) {
+export function updateWindowSize(windowWidth, windowHeight) {
   return {
     type: 'UPDATE_WINDOW_SIZE',
-    deviceSpec: { windowWidth, windowheight }
+    deviceSpec: { windowWidth, windowHeight }
   };
 }
 

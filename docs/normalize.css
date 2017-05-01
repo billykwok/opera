@@ -11,6 +11,8 @@
 
 html {
   width: 100%;
+  height: 100%;
+  margin: 0;
   min-width: 320px;
   line-height: 1.15; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */
@@ -20,9 +22,14 @@ html {
 
 body {
   width: 100%;
-  min-width: 320px;
+  height: 100%;
   margin: 0;
-  background-color: #f4f4f4;
+  min-width: 320px;
+  background-color: #35577c;
+}
+
+a {
+  color: #2ebab2;
 }
 
 /* Sections
