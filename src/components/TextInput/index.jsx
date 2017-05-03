@@ -54,7 +54,7 @@ export default class TextInput
   state = { value: '' };
 
   onPlay = () => {
-    Sound.c4.play();
+    Sound.playText(this.state.value);
     console.log(`Started with ${this.state.value}`);
   };
 

@@ -76,6 +76,7 @@
         "allowSamePrecedence": true
       }
     ],
+    no-plusplus: ["error", { "allowForLoopAfterthoughts": true }],
     "max-len": [2, 80, 2, {
       "ignoreUrls": true,
       "ignoreComments": false
