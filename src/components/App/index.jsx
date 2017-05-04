@@ -5,14 +5,11 @@ import connect from 'react-redux/lib/connect/connect';
 
 import Logo from '../Logo';
 import TextInput from '../TextInput';
+import Visualizer from '../Visualizer';
 
 type PropsType = {
   height: number
 };
-
-const NavBar = styled.div`
-  padding: 0.5rem;
-`;
 
 const Layout = styled.div`
   background-color: #35577c;
@@ -25,8 +22,9 @@ function mapStateToProps(state) {
 
 const App = (props: PropsType): React.Element<any> => (
   <Layout height={props.height + 120}>
-    <NavBar><Logo /></NavBar>
+    <Visualizer height={props.height} />
     <TextInput height={props.height + 120} />
+    <Logo />
   </Layout>
 );
 

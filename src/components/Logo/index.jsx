@@ -3,6 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SVG = styled.svg`
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
   height: 6rem;
 `;
 

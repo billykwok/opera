@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Sound from '../../utils/loadAudio';
+import playText from '../../utils/loadAudio';
 
 type DefaultPropsType = {
   height: number
@@ -17,6 +17,9 @@ type StateType = {
 };
 
 const InputContainer = styled.div`
+  position: absolute;
+  left: 0px;
+  top: 120px;
   padding: 1rem;
   color: #fff;
 `;
@@ -54,8 +57,7 @@ export default class TextInput
   state = { value: '' };
 
   onPlay = () => {
-    Sound.playText(this.state.value);
-    console.log(`Started with ${this.state.value}`);
+    playText(this.state.value);
   };
 
   onStop = () => {
