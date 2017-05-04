@@ -33,6 +33,14 @@ export default function playText(text: string): void {
     // "Lorem", "ipsum", "dolor", "sit, "amet", "consecte", "tur", ...
   ).forEach((segment, segmentIndex) => {
     // "Lorem"
+    if (segmentIndex % 3 === 0) {
+      Rx.Scheduler.async.schedule(() => {
+        playSoundPiece({
+          instrument: 'swell',
+          note: ['ab3', 'eb3', 'gb3'][Math.round(2 * Math.random())]
+        });
+      }, segmentIndex * 2 * BEAT_DURATION);
+    }
     let transformedSegment = segment;
     if (segment.indexOf(',') !== -1) {
       // Last char
@@ -45,11 +53,14 @@ export default function playText(text: string): void {
       const totalDelay =
         segmentIndex * 2 * BEAT_DURATION +
         rhythmMap[transformedSegment.length - 1][charIndex] * BEAT_DURATION;
-      console.log(char);
       if (char in CharacterToSoundPieceMap) {
         Rx.Scheduler.async.schedule(() => {
           console.log(CharacterToSoundPieceMap[char]);
-          playSoundPiece(CharacterToSoundPieceMap[char]);
+          playSoundPiece(
+            CharacterToSoundPieceMap[
+              charIndex === 1 ? char.toUpperCase() : char
+            ]
+          );
         }, totalDelay);
       }
     });

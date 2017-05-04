@@ -5,6 +5,6 @@ A microsite that turns any piece of text into music~ 🎶 🎹 🎻 🎷 🥁 �
 ### Stuff used to make this happen
 
  * [React](https://facebook.github.io/react)
- * [Styletron](https://styletron.js.org)
- * [React Music](https://github.com/FormidableLabs/react-music)
+ * [RxJS](https://reactivex.io/rxjs)
+ * [Pizzicato](https://alemangui.github.io/pizzicato)
  * [Yarn](https://yarnpkg.com/en/)
