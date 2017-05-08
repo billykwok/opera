@@ -4,7 +4,7 @@ import cappedArgFlatMap from 'lodash/fp/flatMap';
 import map from 'lodash/fp/map';
 import capitalize from 'lodash/fp/capitalize';
 
-import CharacterToSoundPieceMap from './CharacterToNoteMap';
+import scheme from '../scheme/scheme_default';
 
 const flatMap = cappedArgFlatMap.convert({ cap: false });
 
@@ -51,9 +51,9 @@ export default function mapTextToSong(
       flatMap((s: string, barId: number): Array<SoundPiece> =>
         s
           .split('')
-          .filter((char: string) => char in CharacterToSoundPieceMap)
+          .filter((char: string) => char in scheme)
           .map((char: string, pos: number): SoundPiece => ({
-            ...CharacterToSoundPieceMap[char],
+            ...scheme[char],
             delay: barId * 4 * BEAT_DUR +
               rhythmMap[s.length - 1][pos] * BEAT_DUR
           }))
