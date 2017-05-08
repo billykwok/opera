@@ -1,0 +1,72 @@
+export default {
+  'Gyemyeonjo Scale': [
+    { value: 'scheme_Gyemyeonjo_GB', label: 'Gyemyeonjo Scale in Gb Major' },
+    { value: 'scheme_Gyemyeonjo_F', label: 'Gyemyeonjo Scale in F Major' },
+    { value: 'scheme_Gyemyeonjo_E', label: 'Gyemyeonjo Scale in E Major' },
+    { value: 'scheme_Gyemyeonjo_EB', label: 'Gyemyeonjo Scale in Eb Major' },
+    { value: 'scheme_Gyemyeonjo_D', label: 'Gyemyeonjo Scale in D Major' },
+    { value: 'scheme_Gyemyeonjo_DB', label: 'Gyemyeonjo Scale in Db Major' },
+    { value: 'scheme_Gyemyeonjo_C', label: 'Gyemyeonjo Scale in C Major' },
+    { value: 'scheme_Gyemyeonjo_B', label: 'Gyemyeonjo Scale in B Major' },
+    { value: 'scheme_Gyemyeonjo_BB', label: 'Gyemyeonjo Scale in Bb Major' },
+    { value: 'scheme_Gyemyeonjo_A', label: 'Gyemyeonjo Scale in A Major' },
+    { value: 'scheme_Gyemyeonjo_AB', label: 'Gyemyeonjo Scale in Ab Major' },
+    { value: 'scheme_Gyemyeonjo_G', label: 'Gyemyeonjo Scale in G Major' }
+  ],
+  'In Sen Scale': [
+    { value: 'scheme_InSen_GB', label: 'In Sen Scale in Gb Major' },
+    { value: 'scheme_InSen_F', label: 'In Sen Scale in F Major' },
+    { value: 'scheme_InSen_E', label: 'In Sen Scale in E Major' },
+    { value: 'scheme_InSen_EB', label: 'In Sen Scale in Eb Major' },
+    { value: 'scheme_InSen_D', label: 'In Sen Scale in D Major' },
+    { value: 'scheme_InSen_DB', label: 'In Sen Scale in Db Major' },
+    { value: 'scheme_InSen_C', label: 'In Sen Scale in C Major' },
+    { value: 'scheme_InSen_B', label: 'In Sen Scale in B Major' },
+    { value: 'scheme_InSen_BB', label: 'In Sen Scale in Bb Major' },
+    { value: 'scheme_InSen_A', label: 'In Sen Scale in A Major' },
+    { value: 'scheme_InSen_AB', label: 'In Sen Scale in Ab Major' },
+    { value: 'scheme_InSen_G', label: 'In Sen Scale in G Major' }
+  ],
+  'Ionian Major 9': [
+    { value: 'scheme_IonianMajor9_GB', label: 'Ionian Major 9 in Gb Major' },
+    { value: 'scheme_IonianMajor9_F', label: 'Ionian Major 9 in F Major' },
+    { value: 'scheme_IonianMajor9_E', label: 'Ionian Major 9 in E Major' },
+    { value: 'scheme_IonianMajor9_EB', label: 'Ionian Major 9 in Eb Major' },
+    { value: 'scheme_IonianMajor9_D', label: 'Ionian Major 9 in D Major' },
+    { value: 'scheme_IonianMajor9_DB', label: 'Ionian Major 9 in Db Major' },
+    { value: 'scheme_IonianMajor9_C', label: 'Ionian Major 9 in C Major' },
+    { value: 'scheme_IonianMajor9_B', label: 'Ionian Major 9 in B Major' },
+    { value: 'scheme_IonianMajor9_BB', label: 'Ionian Major 9 in Bb Major' },
+    { value: 'scheme_IonianMajor9_A', label: 'Ionian Major 9 in A Major' },
+    { value: 'scheme_IonianMajor9_AB', label: 'Ionian Major 9 in Ab Major' },
+    { value: 'scheme_IonianMajor9_G', label: 'Ionian Major 9 in G Major' }
+  ],
+  'Pentatonic Scale': [
+    { value: 'scheme_Pentatonic_GB', label: 'Pentatonic Scale in Gb Major' },
+    { value: 'scheme_Pentatonic_F', label: 'Pentatonic Scale in F Major' },
+    { value: 'scheme_Pentatonic_E', label: 'Pentatonic Scale in E Major' },
+    { value: 'scheme_Pentatonic_EB', label: 'Pentatonic Scale in Eb Major' },
+    { value: 'scheme_Pentatonic_D', label: 'Pentatonic Scale in D Major' },
+    { value: 'scheme_Pentatonic_DB', label: 'Pentatonic Scale in Db Major' },
+    { value: 'scheme_Pentatonic_C', label: 'Pentatonic Scale in C Major' },
+    { value: 'scheme_Pentatonic_B', label: 'Pentatonic Scale in B Major' },
+    { value: 'scheme_Pentatonic_BB', label: 'Pentatonic Scale in Bb Major' },
+    { value: 'scheme_Pentatonic_A', label: 'Pentatonic Scale in A Major' },
+    { value: 'scheme_Pentatonic_AB', label: 'Pentatonic Scale in Ab Major' },
+    { value: 'scheme_Pentatonic_G', label: 'Pentatonic Scale in G Major' }
+  ],
+  'Hirajoshi Scale': [
+    { value: 'scheme_Hirajoshi_GB', label: 'Hirajoshi Scale in Gb Major' },
+    { value: 'scheme_Hirajoshi_F', label: 'Hirajoshi Scale in F Major' },
+    { value: 'scheme_Hirajoshi_E', label: 'Hirajoshi Scale in E Major' },
+    { value: 'scheme_Hirajoshi_EB', label: 'Hirajoshi Scale in Eb Major' },
+    { value: 'scheme_Hirajoshi_D', label: 'Hirajoshi Scale in D Major' },
+    { value: 'scheme_Hirajoshi_DB', label: 'Hirajoshi Scale in Db Major' },
+    { value: 'scheme_Hirajoshi_C', label: 'Hirajoshi Scale in C Major' },
+    { value: 'scheme_Hirajoshi_B', label: 'Hirajoshi Scale in B Major' },
+    { value: 'scheme_Hirajoshi_BB', label: 'Hirajoshi Scale in Bb Major' },
+    { value: 'scheme_Hirajoshi_A', label: 'Hirajoshi Scale in A Major' },
+    { value: 'scheme_Hirajoshi_AB', label: 'Hirajoshi Scale in Ab Major' },
+    { value: 'scheme_Hirajoshi_G', label: 'Hirajoshi Scale in G Major' }
+  ]
+};

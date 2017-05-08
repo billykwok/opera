@@ -11,3 +11,10 @@ export function updatePlayerState(playerState) {
     playerState
   };
 }
+
+export function updateScheme(scheme) {
+  return {
+    type: 'UPDATE_SCHEME',
+    scheme
+  };
+}
