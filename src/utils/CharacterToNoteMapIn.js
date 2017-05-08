@@ -1,6 +1,9 @@
 /* eslint quote-props: ["error", "consistent"] */
 
-// In scale (Minor)
+// Japanese In Sen scale 
+// 1-4-2-3-2
+// Gb G B Db E Gb
+
 export default {
   'a': { instrument: 'piano', note: 'db4' },
   'b': { instrument: 'piano', note: 'g3' },
