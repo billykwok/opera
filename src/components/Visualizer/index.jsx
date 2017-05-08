@@ -12,6 +12,18 @@ const Canvas = styled.div`
   overflow: hidden;
 `;
 
+const Placeholder = styled.div`
+  position: absolute;
+  right: 50%;
+  top: 18rem;
+  margin-right: -24rem;
+  width: 24rem;
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1.5;
+`;
+
 const instrumentColor = {
   piano: '#40A7B7',
   celesta: '#CFAF4A',
@@ -19,7 +31,8 @@ const instrumentColor = {
 };
 
 type PropsType = {
-  height: number
+  height: number,
+  playerState: string
 };
 
 type StateType = {
@@ -47,6 +60,11 @@ class Visualizer extends React.Component<*, PropsType, StateType> {
   render() {
     return (
       <Canvas height={this.props.height}>
+        {this.props.playerState !== 'Playing' &&
+          <Placeholder>
+            Type your favorite piece of text on the left hand side.
+            Click the &quot;Play&quot; button and see the magic!
+          </Placeholder>}
         {this.state.activeSoundPieces.map(
           (s: ?SoundPiece) =>
             s &&
@@ -62,7 +80,10 @@ class Visualizer extends React.Component<*, PropsType, StateType> {
 }
 
 function mapStateToProps(state) {
-  return { height: state.deviceSpec.windowHeight };
+  return {
+    height: state.deviceSpec.windowHeight,
+    playerState: state.playerState
+  };
 }
 
 export default connect(mapStateToProps)(Visualizer);

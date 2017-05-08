@@ -3,5 +3,6 @@ export default {
     windowWidth: window.innerWidth,
     windowHeight: window.innerHeight
   },
-  playerState: 'Stopped'
+  playerState: 'Stopped',
+  scheme: 'scheme_Pentatonic_GB'
 };

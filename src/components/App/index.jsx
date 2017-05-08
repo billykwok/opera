@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import connect from 'react-redux/lib/connect/connect';
 
 import Logo from '../Logo';
-import TextInput from '../TextInput';
+import TextInput from '../InputView';
 import Visualizer from '../Visualizer';
 
 type PropsType = {

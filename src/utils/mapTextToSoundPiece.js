@@ -22,7 +22,8 @@ const rhythmMap: Array<Array<number>> = [
 ];
 
 export default function mapTextToSong(
-  text: string
+  text: string,
+  schemeName: string
 ): { duration: number, content: Array<SoundPiece> } {
   // "Abc123 defghij456klmn, dasf124lhk." ...
 

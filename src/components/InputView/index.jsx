@@ -3,11 +3,15 @@ import React from 'react';
 import styled from 'styled-components';
 import connect from 'react-redux/lib/connect/connect';
 
+import store from '../../redux/store';
+import { updateScheme } from '../../redux/actions';
+import schemeMap from '../../utils/schemeMap';
 import PlaybackScheduler from '../../utils/PlaybackScheduler';
 
 type PropsType = {
   height: number,
-  playerState: string
+  playerState: string,
+  scheme: string
 };
 
 type StateType = {
@@ -25,10 +29,10 @@ const InputContainer = styled.div`
 `;
 
 const TextArea = styled.textarea`
-  padding: 0.5rem;
+  padding: 1rem;
   box-sizing: border-box;
   width: 24rem;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.2);
   color: #fff;
   border: none;
   font-size: 1.125rem;
@@ -56,15 +60,25 @@ const ControlBtn = styled.button`
   }
 `;
 
-const Control = styled.div`
+const ControlRow = styled.div`
 `;
 
-class TextInput extends React.Component<*, PropsType, StateType> {
+const Select = styled.select`
+  font-size: 1rem;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+`;
+
+function onSelectScheme(event) {
+  store.dispatch(updateScheme(event.target.value));
+}
+
+class InputView extends React.Component<*, PropsType, StateType> {
   state = { value: '' };
 
   onPlay = () => {
     if (this.props.playerState === 'Stopped') {
-      PlaybackScheduler.play(this.state.value);
+      PlaybackScheduler.play(this.state.value, this.props.scheme);
     }
   };
 
@@ -80,11 +94,11 @@ class TextInput extends React.Component<*, PropsType, StateType> {
     return (
       <InputContainer>
         <TextArea
-          rows={Math.floor(this.props.height / 40)}
+          rows={Math.floor(this.props.height / 50)}
           onChange={this.handleChange}
           placeholder="Type something here to see the magic..."
         />
-        <Control>
+        <ControlRow>
           <CharCounter>
             Character Count:
             {' '}
@@ -94,6 +108,19 @@ class TextInput extends React.Component<*, PropsType, StateType> {
             {' '}
             {this.props.playerState}
           </CharCounter>
+        </ControlRow>
+        <ControlRow>
+          <Select value="scheme_Pentatonic_GB" onChange={onSelectScheme}>
+            {Object.keys(schemeMap).map(groupLabel => (
+              <optgroup key={groupLabel} label={groupLabel}>
+                {schemeMap[groupLabel].map(({ value, label }) => (
+                  <option value={value}>{label}</option>
+                ))}
+              </optgroup>
+            ))}
+          </Select>
+        </ControlRow>
+        <ControlRow>
           <ControlBtn
             type="button"
             onClick={this.onPlay}
@@ -108,7 +135,7 @@ class TextInput extends React.Component<*, PropsType, StateType> {
           >
             Stop
           </ControlBtn>
-        </Control>
+        </ControlRow>
       </InputContainer>
     );
   }
@@ -117,8 +144,9 @@ class TextInput extends React.Component<*, PropsType, StateType> {
 function mapStateToProps(state) {
   return {
     height: state.deviceSpec.windowHeight + 120,
-    playerState: state.playerState
+    playerState: state.playerState,
+    scheme: state.scheme
   };
 }
 
-export default connect(mapStateToProps)(TextInput);
+export default connect(mapStateToProps)(InputView);

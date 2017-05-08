@@ -2,7 +2,7 @@
 
 A microsite that turns any piece of text into music~ 🎶 🎹 🎻 🎷 🥁 🎺 🎸 🎼
 
-Visit [https://billykwok.github.io/opera/](https://billykwok.github.io/opera/) Now!
+Visit [https://billykwok.github.io/opera](https://billykwok.github.io/opera) Now!
 
 ### Stuff used to make this happen
 
