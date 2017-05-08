@@ -21,36 +21,45 @@ const rhythmMap: Array<Array<number>> = [
   [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5]
 ];
 
-export default function mapTextToSoundPiece(text: string): Array<SoundPiece> {
+export default function mapTextToSong(
+  text: string
+): { duration: number, content: Array<SoundPiece> } {
   // "Abc123 defghij456klmn, dasf124lhk." ...
-  // eslint-disable-next-line lodash-fp/prefer-composition-grouping
-  return flow(
-    // [ "Abc123", "defghij456klmn,", "dasf124lhk." ... ]
-    // ⬇
-    cappedArgFlatMap((s: string): Array<string> => s.match(/.{1,7}/g) || []),
-    // ⬇
-    // [ "Abc123", "defghij4", "56klmn,", "dasf124l", "hk." ... ]
-    // ⬇
-    map((s: string): string =>
-      s.replace(/(.*),/i, ' ').replace(/(.*)\./i, '  ')
-    ),
-    // ⬇
-    // [ "Abc123", "defghij4", "56klmn ", "dasf124l", "hk  " ... ]
-    // ⬇
-    map((s: string): string => `${capitalize(s)} `),
-    // ⬇
-    // [ "Abc123 ", "Defghij4 ", "56klmn  ", "Dasf124l ", "Hk   " ... ]
-    // ⬇
-    flatMap((s: string, barId: number): Array<SoundPiece> =>
-      s
-        .split('')
-        .filter((char: string) => char in CharacterToSoundPieceMap)
-        .map((char: string, pos: number): SoundPiece => ({
-          ...CharacterToSoundPieceMap[char],
-          delay: barId * 4 * BEAT_DUR + rhythmMap[s.length - 1][pos] * BEAT_DUR
-        }))
-    )
-    // ⬇
-    // [ SoundPiece, ... ]
+
+  // [ "Abc123", "defghij456klmn,", "dasf124lhk." ... ]
+  // ⬇
+  const bars: Array<string> = cappedArgFlatMap(
+    (s: string): Array<string> => s.match(/.{1,7}/g) || []
   )(text.split(' '));
+  // ⬇
+  return {
+    duration: bars.length * 4 * BEAT_DUR,
+    // eslint-disable-next-line lodash-fp/prefer-composition-grouping
+    content: flow(
+      // [ "Abc123", "defghij4", "56klmn,", "dasf124l", "hk." ... ]
+      // ⬇
+      map((s: string): string =>
+        s.replace(/(.*),/i, ' ').replace(/(.*)\./i, '  ')
+      ),
+      // ⬇
+      // [ "Abc123", "defghij4", "56klmn ", "dasf124l", "hk  " ... ]
+      // ⬇
+      map((s: string): string => `${capitalize(s)} `),
+      // ⬇
+      // [ "Abc123 ", "Defghij4 ", "56klmn  ", "Dasf124l ", "Hk   " ... ]
+      // ⬇
+      flatMap((s: string, barId: number): Array<SoundPiece> =>
+        s
+          .split('')
+          .filter((char: string) => char in CharacterToSoundPieceMap)
+          .map((char: string, pos: number): SoundPiece => ({
+            ...CharacterToSoundPieceMap[char],
+            delay: barId * 4 * BEAT_DUR +
+              rhythmMap[s.length - 1][pos] * BEAT_DUR
+          }))
+      )
+      // ⬇
+      // [ SoundPiece, ... ]
+    )(bars)
+  };
 }

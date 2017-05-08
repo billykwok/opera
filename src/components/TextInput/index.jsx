@@ -1,15 +1,13 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
+import connect from 'react-redux/lib/connect/connect';
 
 import PlaybackScheduler from '../../utils/PlaybackScheduler';
 
-type DefaultPropsType = {
-  height: number
-};
-
 type PropsType = {
-  height: number
+  height: number,
+  playerState: string
 };
 
 type StateType = {
@@ -46,27 +44,32 @@ const CharCounter = styled.p`
 
 const ControlBtn = styled.button`
   border: 0;
-  background: #6a9fd7;
+  background-color: #6a9fd7;
   color: #fff;
   font-size: 1.125rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  &:disabled {
+    background-color: rgba(100, 131, 164, 0.5);
+    color: #a1a1a1;
+    cursor: not-allowed;
+  }
 `;
 
 const Control = styled.div`
 `;
 
-export default class TextInput
-  extends React.Component<DefaultPropsType, PropsType, StateType> {
-  static defaultProps = { height: 1024 };
+class TextInput extends React.Component<*, PropsType, StateType> {
   state = { value: '' };
 
   onPlay = () => {
-    PlaybackScheduler.play(this.state.value);
+    if (this.props.playerState === 'Stopped') {
+      PlaybackScheduler.play(this.state.value);
+    }
   };
 
   onStop = () => {
-    PlaybackScheduler.stop();
+    if (this.props.playerState === 'Playing') PlaybackScheduler.stop();
   };
 
   handleChange = (event: SyntheticInputEvent) => {
@@ -83,14 +86,39 @@ export default class TextInput
         />
         <Control>
           <CharCounter>
-            Character Count: {this.state.value.length} / 10,000
+            Character Count:
+            {' '}
+            {this.state.value.length}
+            {' '}
+            / 10,000 &nbsp;&nbsp;&nbsp; State:
+            {' '}
+            {this.props.playerState}
           </CharCounter>
-          <ControlBtn type="button" onClick={this.onPlay}>
+          <ControlBtn
+            type="button"
+            onClick={this.onPlay}
+            disabled={this.props.playerState !== 'Stopped'}
+          >
             Play
           </ControlBtn>&nbsp;&nbsp;&nbsp;
-          <ControlBtn type="button" onClick={this.onStop}>Stop</ControlBtn>
+          <ControlBtn
+            type="button"
+            onClick={this.onStop}
+            disabled={this.props.playerState !== 'Playing'}
+          >
+            Stop
+          </ControlBtn>
         </Control>
       </InputContainer>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    height: state.deviceSpec.windowHeight + 120,
+    playerState: state.playerState
+  };
+}
+
+export default connect(mapStateToProps)(TextInput);

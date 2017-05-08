@@ -10,4 +10,13 @@ function deviceSpec(oState = defaultState.deviceSpec, action) {
   }
 }
 
-export default combineReducers({ deviceSpec });
+function playerState(oState = defaultState.playerState, action) {
+  switch (action.type) {
+    case 'UPDATE_PLAYER_STATE':
+      return action.playerState;
+    default:
+      return oState;
+  }
+}
+
+export default combineReducers({ deviceSpec, playerState });

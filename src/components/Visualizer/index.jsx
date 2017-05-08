@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
+import connect from 'react-redux/lib/connect/connect';
 
 import PlaybackScheduler from '../../utils/PlaybackScheduler';
 import NoteCircle from './NoteCircle';
@@ -60,4 +61,8 @@ class Visualizer extends React.Component<*, PropsType, StateType> {
   }
 }
 
-export default Visualizer;
+function mapStateToProps(state) {
+  return { height: state.deviceSpec.windowHeight };
+}
+
+export default connect(mapStateToProps)(Visualizer);

@@ -4,3 +4,10 @@ export function updateWindowSize(windowWidth, windowHeight) {
     deviceSpec: { windowWidth, windowHeight }
   };
 }
+
+export function updatePlayerState(playerState) {
+  return {
+    type: 'UPDATE_PLAYER_STATE',
+    playerState
+  };
+}

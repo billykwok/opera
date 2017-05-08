@@ -16,16 +16,16 @@ const Layout = styled.div`
   height: ${props => props.height}px;
 `;
 
-function mapStateToProps(state) {
-  return { height: state.deviceSpec.windowHeight };
-}
-
 const App = (props: PropsType): React.Element<any> => (
-  <Layout height={props.height + 120}>
-    <Visualizer height={props.height} />
-    <TextInput height={props.height + 120} />
+  <Layout height={props.height}>
+    <Visualizer />
+    <TextInput />
     <Logo />
   </Layout>
 );
+
+function mapStateToProps(state) {
+  return { height: state.deviceSpec.windowHeight + 120 };
+}
 
 export default connect(mapStateToProps)(App);
