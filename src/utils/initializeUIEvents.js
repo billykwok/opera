@@ -1,36 +1,28 @@
-import _debounce from 'lodash/debounce';
-
-import throttleResize from './throttleResize';
-import throttleOnscroll from './throttleOnScroll';
-import getScrollTop from './getScrollTop';
-// import mapDeviceWidthToSize from './mapDeviceWidthToSize';
-
-import store from './clientStoreInstance';
-import { updateWindowSize, updateScrollState } from '../redux/actions';
+import store from '../redux/store';
+import { updateWindowSize } from '../redux/actions';
 
 function handleResize() {
   store.dispatch(updateWindowSize(window.innerWidth, window.innerHeight));
-  store.dispatch(updateScrollState(getScrollTop(), 'SCROLL_END'));
 }
 
-function onScrolling() {
-  store.dispatch(updateScrollState(getScrollTop(), 'SCROLLING'));
-}
-
-const onScrollEnd = _debounce(() => {
-  store.dispatch(updateScrollState(getScrollTop(), 'SCROLL_END'));
-}, 200);
-
-function handleOnScroll() {
-  onScrolling();
-  onScrollEnd();
+function throttleResize() {
+  const throttle = (type, name) => {
+    let running = false;
+    const func = () => {
+      if (running) return;
+      running = true;
+      requestAnimationFrame(() => {
+        window.dispatchEvent(new CustomEvent(name));
+        running = false;
+      });
+    };
+    window.addEventListener(type, func);
+  };
+  throttle('resize', 'throttledResize');
 }
 
 export default function() {
   // Throttle UI events
   throttleResize();
-  throttleOnscroll();
-
   window.addEventListener('throttledResize', handleResize);
-  window.addEventListener('throttledOnScroll', handleOnScroll);
 }

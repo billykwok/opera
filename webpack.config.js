@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
 const HOST = 'localhost';
@@ -35,6 +36,13 @@ const config = {
     ]
   },
   plugins: [
+    new LodashModuleReplacementPlugin({
+      currying: true,
+      collections: true,
+      flattening: true,
+      placeholders: true,
+      metadata: true
+    }),
     new webpack.DefinePlugin(
       Object.assign(
         {},

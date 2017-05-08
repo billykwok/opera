@@ -1,42 +1,63 @@
 // @flow
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+
+import PlaybackScheduler from '../../utils/PlaybackScheduler';
+import NoteCircle from './NoteCircle';
+
+const Canvas = styled.div`
+  width: 100%;
+  height: ${props => props.height}px;
+  overflow: hidden;
+`;
+
+const instrumentColor = {
+  piano: '#40A7B7',
+  celesta: '#CFAF4A',
+  swell: '#5FAC56'
+};
 
 type PropsType = {
   height: number
 };
 
-const Canvas = styled.div`
-  width: 100%;
-  height: ${props => props.height}px;
-`;
+type StateType = {
+  activeSoundPieces: Array<?SoundPiece>
+};
 
-const zoomInFadeOut = keyframes`
-  from { transform: scale(1); opacity: 1; }
-  to { transform: scale(5); opacity: 0; }
-`;
+class Visualizer extends React.Component<*, PropsType, StateType> {
+  state = { activeSoundPieces: new Array(20).fill(null) };
 
-const Circle = styled.div`
-  position: absolute;
-  width: ${props => props.radius * 2}px;
-  height: ${props => props.radius * 2}px;
-  left: ${props => props.x - props.radius}px;
-  top: ${props => props.y - props.radius}px;
-  border-radius: 50%;
-  background-color: #51759c;
-  animation: 1s ease-out 0s 1 ${zoomInFadeOut};
-  transform: scale(5);
-  opacity: 0;
-`;
+  componentDidMount() {
+    PlaybackScheduler.Subject.subscribe({
+      next: (soundPiece: SoundPiece) => {
+        this.setState((prevState) => {
+          const newSoundPieces = prevState.activeSoundPieces;
+          newSoundPieces[this.pointer] = soundPiece;
+          this.pointer = this.pointer >= 19 ? 0 : this.pointer + 1;
+          return { activeSoundPieces: newSoundPieces };
+        });
+      }
+    });
+  }
 
-const NoteCircle = (): React.Element<any> => (
-  <Circle radius={80} x={50} y={50} />
-);
+  pointer: number = 0;
 
-const Visualizer = (props: PropsType): React.Element<any> => (
-  <Canvas height={props.height}>
-    {new Array(5).fill(null).map((_, i) => <NoteCircle key={i} />)}
-  </Canvas>
-);
+  render() {
+    return (
+      <Canvas height={this.props.height}>
+        {this.state.activeSoundPieces.map(
+          (s: ?SoundPiece) =>
+            s &&
+            <NoteCircle
+              key={`${s.instrument}_${s.note}_${s.delay}`}
+              color={instrumentColor[s.instrument]}
+              desc={`${s.note} in ${s.instrument}`}
+            />
+        )}
+      </Canvas>
+    );
+  }
+}
 
 export default Visualizer;

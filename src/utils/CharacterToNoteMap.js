@@ -32,7 +32,7 @@ export default {
   'D': { instrument: 'celesta', note: 'ab4' },
   'E': { instrument: 'celesta', note: 'gb4' },
   'F': { instrument: 'celesta', note: 'eb5' },
-  'G': { instrument: 'celesta', note: 'gb2' },
+  'G': { instrument: 'celesta', note: 'eb4' },
   'H': { instrument: 'celesta', note: 'bb3' },
   'I': { instrument: 'celesta', note: 'bb6' },
   'J': { instrument: 'celesta', note: 'eb6' },

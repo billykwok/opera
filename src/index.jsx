@@ -5,13 +5,14 @@ import AppContainer from 'react-hot-loader/lib/AppContainer';
 import Provider from 'react-redux/lib/components/Provider';
 
 import App from './components/App';
-import clientStoreInstance from './utils/clientStoreInstance';
+import store from './redux/store';
 import initializeUIEvents from './utils/initializeUIEvents';
+import SoundPiecePlayer from './utils/SoundPiecePlayer';
 
 function renderApp() {
   render(
     <AppContainer>
-      <Provider store={clientStoreInstance}>
+      <Provider store={store}>
         <App />
       </Provider>
     </AppContainer>,
@@ -20,6 +21,7 @@ function renderApp() {
 }
 
 initializeUIEvents();
+SoundPiecePlayer.init();
 renderApp();
 
 if (module.hot) {

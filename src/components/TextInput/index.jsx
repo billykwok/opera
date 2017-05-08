@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import playText from '../../utils/loadAudio';
+import PlaybackScheduler from '../../utils/PlaybackScheduler';
 
 type DefaultPropsType = {
   height: number
@@ -20,15 +20,17 @@ const InputContainer = styled.div`
   position: absolute;
   left: 0px;
   top: 120px;
+  margin: 1rem;
   padding: 1rem;
   color: #fff;
+  background: rgba(12, 25, 41, 0.7);
 `;
 
 const TextArea = styled.textarea`
-  padding: 1rem;
+  padding: 0.5rem;
   box-sizing: border-box;
   width: 24rem;
-  background-color: #233447;
+  background-color: transparent;
   color: #fff;
   border: none;
   font-size: 1.125rem;
@@ -51,17 +53,20 @@ const ControlBtn = styled.button`
   cursor: pointer;
 `;
 
+const Control = styled.div`
+`;
+
 export default class TextInput
   extends React.Component<DefaultPropsType, PropsType, StateType> {
   static defaultProps = { height: 1024 };
   state = { value: '' };
 
   onPlay = () => {
-    playText(this.state.value);
+    PlaybackScheduler.play(this.state.value);
   };
 
   onStop = () => {
-    console.log(`Stopped with ${this.state.value}`);
+    PlaybackScheduler.stop();
   };
 
   handleChange = (event: SyntheticInputEvent) => {
@@ -76,7 +81,7 @@ export default class TextInput
           onChange={this.handleChange}
           placeholder="Type something here to see the magic..."
         />
-        <div>
+        <Control>
           <CharCounter>
             Character Count: {this.state.value.length} / 10,000
           </CharCounter>
@@ -84,7 +89,7 @@ export default class TextInput
             Play
           </ControlBtn>&nbsp;&nbsp;&nbsp;
           <ControlBtn type="button" onClick={this.onStop}>Stop</ControlBtn>
-        </div>
+        </Control>
       </InputContainer>
     );
   }
