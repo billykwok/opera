@@ -1,9 +1,5 @@
 /* eslint quote-props: ["error", "consistent"] */
 
-// (Chinese) Pentatonic scale
-// 2-2-3-2-3
-// Gb Ab Bb Db Eb G
-
 export default {
   'a': { instrument: 'piano', note: 'db4' },
   'b': { instrument: 'piano', note: 'ab3' },
