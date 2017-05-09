@@ -1,6 +1,6 @@
 /* eslint quote-props: ["error", "consistent"] */
 
-// Major Scale
+// Melodic Minor Scale
 // 2-1-2-2-2-2-1
 // C D Eb F G A B C
 

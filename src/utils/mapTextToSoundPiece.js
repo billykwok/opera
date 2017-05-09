@@ -6,7 +6,7 @@ import capitalize from 'lodash/fp/capitalize';
 
 const flatMap = cappedArgFlatMap.convert({ cap: false });
 
-const BEAT_DUR: number = 5000; // 0.5 sec
+const BEAT_DUR: number = 500; // 0.5 sec
 
 const rhythmMap: Array<Array<number>> = [
   [0],
