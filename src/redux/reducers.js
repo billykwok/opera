@@ -19,13 +19,4 @@ function playerState(oState = defaultState.playerState, action) {
   }
 }
 
-function scheme(oState = defaultState.scheme, action) {
-  switch (action.type) {
-    case 'UPDATE_SCHEME':
-      return action.scheme;
-    default:
-      return oState;
-  }
-}
-
-export default combineReducers({ deviceSpec, playerState, scheme });
+export default combineReducers({ deviceSpec, playerState });

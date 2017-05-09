@@ -17,34 +17,37 @@ export default {
     timeoutIds.forEach(id => clearTimeout(id));
     store.dispatch(updatePlayerState('Loading...'));
 
-    const song = mapTextToSong(text, scheme);
+    mapTextToSong(text, scheme)
+      .then((song) => {
+        timeoutIds = song.content.map((sp: SoundPiece) =>
+          setTimeout(() => {
+            this.Subject.next(sp);
+          }, sp.delay + 3000)
+        );
 
-    timeoutIds = song.content.map((sp: SoundPiece) =>
-      setTimeout(() => {
-        this.Subject.next(sp);
-      }, sp.delay + 3000)
-    );
+        // Preload the audio to make the playback smoother
+        // eslint-disable-next-line lodash-fp/no-unused-result
+        flow(
+          uniqWith(
+            (a: SoundPiece, b: SoundPiece) =>
+              a.instrument === b.instrument && a.note === b.note
+          ),
+          forEach((sp: SoundPiece) =>
+            BufferLoader.load(`./audio/${sp.instrument}/${sp.note}.mp3`)
+          )
+        )(song.content);
 
-    // Preload the audio to make the playback smoother
-    // eslint-disable-next-line lodash-fp/no-unused-result
-    flow(
-      uniqWith(
-        (a: SoundPiece, b: SoundPiece) =>
-          a.instrument === b.instrument && a.note === b.note
-      ),
-      forEach((sp: SoundPiece) =>
-        BufferLoader.load(`./audio/${sp.instrument}/${sp.note}.mp3`)
-      )
-    )(song.content);
-
-    timeoutIds = timeoutIds.concat(
-      setTimeout(() => {
-        store.dispatch(updatePlayerState('Playing'));
-      }, 2500),
-      setTimeout(() => {
-        store.dispatch(updatePlayerState('Stopped'));
-      }, song.duration + 3000)
-    );
+        timeoutIds = timeoutIds.concat(
+          setTimeout(() => {
+            store.dispatch(updatePlayerState('Playing'));
+          }, 2500),
+          setTimeout(() => {
+            store.dispatch(updatePlayerState('Stopped'));
+          }, song.duration + 3000)
+        );
+      })
+      // eslint-disable-next-line no-console
+      .catch(err => console.error('Failed to load moment', err));
   },
   stop(): void {
     timeoutIds.forEach(id => clearTimeout(id));

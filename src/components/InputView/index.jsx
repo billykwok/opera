@@ -3,19 +3,17 @@ import React from 'react';
 import styled from 'styled-components';
 import connect from 'react-redux/lib/connect/connect';
 
-import store from '../../redux/store';
-import { updateScheme } from '../../redux/actions';
 import schemeMap from '../../utils/schemeMap';
 import PlaybackScheduler from '../../utils/PlaybackScheduler';
 
 type PropsType = {
   height: number,
-  playerState: string,
-  scheme: string
+  playerState: string
 };
 
 type StateType = {
-  value: string
+  text: string,
+  scheme: string
 };
 
 const InputContainer = styled.div`
@@ -69,16 +67,12 @@ const Select = styled.select`
   margin-bottom: 1rem;
 `;
 
-function onSelectScheme(event) {
-  store.dispatch(updateScheme(event.target.value));
-}
-
 class InputView extends React.Component<*, PropsType, StateType> {
-  state = { value: '' };
+  state: StateType = { text: '', scheme: 'scheme_Pentatonic_GB' };
 
   onPlay = () => {
     if (this.props.playerState === 'Stopped') {
-      PlaybackScheduler.play(this.state.value, this.props.scheme);
+      PlaybackScheduler.play(this.state.text, this.state.scheme);
     }
   };
 
@@ -87,7 +81,11 @@ class InputView extends React.Component<*, PropsType, StateType> {
   };
 
   handleChange = (event: SyntheticInputEvent) => {
-    this.setState({ value: event.target.value });
+    this.setState({ text: event.target.value });
+  };
+
+  handleSelecScheme = (event: SyntheticInputEvent) => {
+    this.setState({ scheme: event.target.value });
   };
 
   render() {
@@ -102,7 +100,7 @@ class InputView extends React.Component<*, PropsType, StateType> {
           <CharCounter>
             Character Count:
             {' '}
-            {this.state.value.length}
+            {this.state.text.length}
             {' '}
             / 10,000 &nbsp;&nbsp;&nbsp; State:
             {' '}
@@ -110,11 +108,15 @@ class InputView extends React.Component<*, PropsType, StateType> {
           </CharCounter>
         </ControlRow>
         <ControlRow>
-          <Select value="scheme_Pentatonic_GB" onChange={onSelectScheme}>
+          <Select
+            value={this.state.scheme}
+            onChange={this.handleSelecScheme}
+            disabled={this.props.playerState !== 'Stopped'}
+          >
             {Object.keys(schemeMap).map(groupLabel => (
               <optgroup key={groupLabel} label={groupLabel}>
                 {schemeMap[groupLabel].map(({ value, label }) => (
-                  <option value={value}>{label}</option>
+                  <option key={value} value={value}>{label}</option>
                 ))}
               </optgroup>
             ))}
@@ -144,8 +146,7 @@ class InputView extends React.Component<*, PropsType, StateType> {
 function mapStateToProps(state) {
   return {
     height: state.deviceSpec.windowHeight + 120,
-    playerState: state.playerState,
-    scheme: state.scheme
+    playerState: state.playerState
   };
 }
 
