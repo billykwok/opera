@@ -98,5 +98,9 @@ export default {
   '6': { instrument: 'fluteorgan', note: 'bb3' },
   '7': { instrument: 'fluteorgan', note: 'b2' },
   '8': { instrument: 'fluteorgan', note: 'db2' },
-  '9': { instrument: 'fluteorgan', note: 'd2' }
+  '9': { instrument: 'fluteorgan', note: 'd2' },
+
+  's1': { instrument: 'swell', note: 'b3' },
+  's2': { instrument: 'swell', note: 'gb3' },
+  's3': { instrument: 'swell', note: 'd3' }
 };
