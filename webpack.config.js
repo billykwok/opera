@@ -19,7 +19,7 @@ const config = {
   output: {
     path: path.join(__dirname, 'docs/public'),
     filename: 'bundle.js',
-    publicPath: '/opera/public'
+    publicPath: '/opera/public/'
   },
   resolve: {
     modules: ['src', 'node_modules'],
