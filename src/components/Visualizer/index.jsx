@@ -38,8 +38,8 @@ const instrumentColor = {
   darkchords: '#2d202e',
   dirtyfifth: '#4a7773',
   fluteorgan: '#e3e2e0',
-  plucksynthbass: '#81acd7',
-  shortplucksynth: '#a356aa'
+  pluckysynthbass: '#81acd7',
+  shortpluckysynth: '#a356aa'
 };
 
 type PropsType = {
