@@ -1,6 +1,6 @@
 /* eslint quote-props: ["error", "consistent"] */
 
-// Japanese Hirajoshi scale 
+// Japanese Hirajoshi scale
 // 1-4-2-1-4
 // Gb G B Db D Gb
 

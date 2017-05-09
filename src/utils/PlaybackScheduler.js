@@ -13,11 +13,11 @@ let timeoutIds: Array<number> = [];
 
 export default {
   Subject: new Subject(),
-  play(text: string, scheme: string): void {
+  play(text: string, scheme: string, tempo: number): void {
     timeoutIds.forEach(id => clearTimeout(id));
     store.dispatch(updatePlayerState('Loading...'));
 
-    mapTextToSong(text, scheme)
+    mapTextToSong(text, scheme, 60000 / tempo)
       .then((song) => {
         timeoutIds = song.content.map((sp: SoundPiece) =>
           setTimeout(() => {

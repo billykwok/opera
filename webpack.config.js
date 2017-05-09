@@ -38,10 +38,7 @@ const config = {
   plugins: [
     new LodashModuleReplacementPlugin({
       currying: true,
-      collections: true,
-      flattening: true,
-      placeholders: true,
-      metadata: true
+      flattening: true
     }),
     new webpack.DefinePlugin(
       Object.assign(

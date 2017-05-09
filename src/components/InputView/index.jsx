@@ -13,7 +13,8 @@ type PropsType = {
 
 type StateType = {
   text: string,
-  scheme: string
+  scheme: string,
+  tempo: string
 };
 
 const InputContainer = styled.div`
@@ -64,15 +65,29 @@ const ControlRow = styled.div`
 const Select = styled.select`
   font-size: 1rem;
   padding: 0.25rem;
+  margin-bottom: 0.5rem;
+`;
+
+const TempoInput = styled.input`
+  font-size: 1rem;
+  padding: 1.5px;
+  border: solid #A6A6A6 1px;
+  border-radius: 0.25rem;
+  width: 6rem;
   margin-bottom: 1rem;
 `;
 
 class InputView extends React.Component<*, PropsType, StateType> {
-  state: StateType = { text: '', scheme: 'scheme_Pentatonic_GB' };
+  state: StateType = { text: '', scheme: 'scheme_Pentatonic_GB', tempo: '120' };
 
   onPlay = () => {
+    const safeTempo = Math.min(
+      Math.max(parseInt(this.state.tempo, 10), 30),
+      240
+    );
+    this.setState({ tempo: safeTempo.toString() });
     if (this.props.playerState === 'Stopped') {
-      PlaybackScheduler.play(this.state.text, this.state.scheme);
+      PlaybackScheduler.play(this.state.text, this.state.scheme, safeTempo);
     }
   };
 
@@ -88,6 +103,10 @@ class InputView extends React.Component<*, PropsType, StateType> {
     this.setState({ scheme: event.target.value });
   };
 
+  handleTempoChange = (event: SyntheticInputEvent) => {
+    this.setState({ tempo: event.target.value });
+  };
+
   render() {
     return (
       <InputContainer>
@@ -98,16 +117,14 @@ class InputView extends React.Component<*, PropsType, StateType> {
         />
         <ControlRow>
           <CharCounter>
-            Character Count:
-            {' '}
+            Character Count:&nbsp;
             {this.state.text.length}
-            {' '}
-            / 10,000 &nbsp;&nbsp;&nbsp; State:
-            {' '}
+            &nbsp;/&nbsp;10,000 &nbsp;&nbsp;&nbsp; State:&nbsp;
             {this.props.playerState}
           </CharCounter>
         </ControlRow>
         <ControlRow>
+          Mode/Emotion&nbsp;&nbsp;
           <Select
             value={this.state.scheme}
             onChange={this.handleSelecScheme}
@@ -121,6 +138,14 @@ class InputView extends React.Component<*, PropsType, StateType> {
               </optgroup>
             ))}
           </Select>
+        </ControlRow>
+        <ControlRow>
+          Tempo (in bpm)&nbsp;
+          <TempoInput
+            type="number"
+            value={this.state.tempo}
+            onChange={this.handleTempoChange}
+          />
         </ControlRow>
         <ControlRow>
           <ControlBtn

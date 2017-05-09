@@ -40,7 +40,7 @@ type StateType = {
 };
 
 class Visualizer extends React.Component<*, PropsType, StateType> {
-  state = { activeSoundPieces: new Array(20).fill(null) };
+  state = { activeSoundPieces: new Array(40).fill(null) };
 
   componentDidMount() {
     PlaybackScheduler.Subject.subscribe({
@@ -48,7 +48,7 @@ class Visualizer extends React.Component<*, PropsType, StateType> {
         this.setState((prevState) => {
           const newSoundPieces = prevState.activeSoundPieces;
           newSoundPieces[this.pointer] = soundPiece;
-          this.pointer = this.pointer >= 19 ? 0 : this.pointer + 1;
+          this.pointer = this.pointer >= 39 ? 0 : this.pointer + 1;
           return { activeSoundPieces: newSoundPieces };
         });
       }

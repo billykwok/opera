@@ -6,8 +6,6 @@ import capitalize from 'lodash/fp/capitalize';
 
 const flatMap = cappedArgFlatMap.convert({ cap: false });
 
-const BEAT_DUR: number = 500; // 0.5 sec
-
 const rhythmMap: Array<Array<number>> = [
   [0],
   [0, 2],
@@ -21,22 +19,24 @@ const rhythmMap: Array<Array<number>> = [
 
 export default function mapTextToSong(
   text: string,
-  schemeName: string
+  schemeName: string,
+  beatDuration: number
 ): Promise<any> {
   return import(`../scheme/${schemeName}`).then(({ default: scheme }) => {
     // "Abc123 defghij456klmn, dasf124lhk." ...
+    // ⬇
+    // [ "Abc123", "defghij456klmn,", "dasf124lhk." ... ]
+    // ⬇
     const bars: Array<string> = cappedArgFlatMap(
       (s: string): Array<string> => s.match(/.{1,7}/g) || []
     )(text.split(' '));
     // ⬇
-    // [ "Abc123", "defghij456klmn,", "dasf124lhk." ... ]
+    // [ "Abc123", "defghij4", "56klmn,", "dasf124l", "hk." ... ]
     // ⬇
     return {
-      duration: bars.length * 4 * BEAT_DUR,
+      duration: bars.length * 4 * beatDuration,
       // eslint-disable-next-line lodash-fp/prefer-composition-grouping
       content: flow(
-        // [ "Abc123", "defghij4", "56klmn,", "dasf124l", "hk." ... ]
-        // ⬇
         map((s: string): string =>
           s.replace(/(.*),/i, ' ').replace(/(.*)\./i, '  ')
         ),
@@ -53,9 +53,19 @@ export default function mapTextToSong(
             .filter((char: string) => char in scheme)
             .map((char: string, pos: number): SoundPiece => ({
               ...scheme[char],
-              delay: barId * 4 * BEAT_DUR +
-                rhythmMap[s.length - 1][pos] * BEAT_DUR
+              delay: barId * 4 * beatDuration +
+                rhythmMap[s.length - 1][pos] * beatDuration
             }))
+            .concat(
+              barId % 3 === 0
+                ? {
+                  instrument: 'swell',
+                  note: scheme[['}', '[', ']'][Math.round(Math.random() * 2)]]
+                      .note,
+                  delay: barId * 4 * beatDuration
+                }
+                : []
+            )
         )
         // ⬇
         // [ SoundPiece, ... ]
