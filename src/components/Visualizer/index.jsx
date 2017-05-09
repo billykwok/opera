@@ -26,8 +26,20 @@ const Placeholder = styled.div`
 
 const instrumentColor = {
   piano: '#40A7B7',
-  celesta: '#CFAF4A',
-  swell: '#5FAC56'
+  celesta: '#e2c468',
+  swell: '#5FAC56',
+  animalbg: '#6639c4',
+  animalhigh: '#e07290',
+  animalmid: '#1ab372',
+  animallow: '#4077e0',
+  chimeswell: '#8cd25a',
+  clav: '#60b9b9',
+  colossalsynthbass: '#889e94',
+  darkchords: '#2d202e',
+  dirtyfifth: '#4a7773',
+  fluteorgan: '#e3e2e0',
+  plucksynthbass: '#81acd7',
+  shortplucksynth: '#a356aa'
 };
 
 type PropsType = {

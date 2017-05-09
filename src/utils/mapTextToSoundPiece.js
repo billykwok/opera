@@ -51,17 +51,19 @@ export default function mapTextToSong(
           s
             .split('')
             .filter((char: string) => char in scheme)
-            .map((char: string, pos: number): SoundPiece => ({
-              ...scheme[char],
-              delay: barId * 4 * beatDuration +
-                rhythmMap[s.length - 1][pos] * beatDuration
-            }))
+            .map(
+              (char: string, pos: number, arr: Array<string>): SoundPiece => ({
+                ...scheme[char],
+                delay: barId * 4 * beatDuration +
+                  rhythmMap[arr.length - 1][pos] * beatDuration
+              })
+            )
             .concat(
               barId % 3 === 0
                 ? {
-                  instrument: 'swell',
-                  note: scheme[['}', '[', ']'][Math.round(Math.random() * 2)]]
-                      .note,
+                  ...scheme[
+                      ['s1', 's2', 's3'][Math.round(Math.random() * 2)]
+                    ],
                   delay: barId * 4 * beatDuration
                 }
                 : []

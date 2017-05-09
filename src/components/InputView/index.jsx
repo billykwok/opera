@@ -145,6 +145,7 @@ class InputView extends React.Component<*, PropsType, StateType> {
             type="number"
             value={this.state.tempo}
             onChange={this.handleTempoChange}
+            disabled={this.props.playerState !== 'Stopped'}
           />
         </ControlRow>
         <ControlRow>

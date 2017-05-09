@@ -141,6 +141,6 @@ export default {
   // '9': { instrument: 'animallow', note: 'leopard' },
 
   's1': { instrument: 'animalbg', note: 'beach' },
-  's2': { instrument: 'animalbg', note: 'db3' },
+  's2': { instrument: 'animalbg', note: 'rain' },
   's3': { instrument: 'animalbg', note: 'swamp' }
 };

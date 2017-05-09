@@ -15,6 +15,7 @@ const Circle = styled.div`
   border-radius: 50%;
   background-color: ${props => props.color};
   color: #fff;
+  font-size: 0.75rem;
   text-align: center;
   vertical-align: middle;
   line-height: ${props => props.radius * 2}px;

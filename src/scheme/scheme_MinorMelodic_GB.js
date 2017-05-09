@@ -38,7 +38,7 @@ export default {
   'E': { instrument: 'celesta', note: 'gb4' },
   'F': { instrument: 'celesta', note: 'ab5' },
   'G': { instrument: 'celesta', note: 'b5' },
-  'h': { instrument: 'celesta', note: 'f5' },
+  'H': { instrument: 'celesta', note: 'f5' },
   'I': { instrument: 'celesta', note: 'gb5' },
   'J': { instrument: 'celesta', note: 'ab3' },
   'K': { instrument: 'celesta', note: 'f6' },
