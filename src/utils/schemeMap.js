@@ -69,7 +69,7 @@ export default {
     { value: 'scheme_Hirajoshi_AB', label: 'Hirajoshi Scale in Ab' },
     { value: 'scheme_Hirajoshi_G', label: 'Hirajoshi Scale in G' }
   ],
-  Major: [
+  'Major': [
     { value: 'scheme_Major_GB', label: 'Gb Major' },
     { value: 'scheme_Major_F', label: 'F Major' },
     { value: 'scheme_Major_E', label: 'E Major' },
@@ -97,8 +97,9 @@ export default {
     { value: 'scheme_MinorMelodic_AB', label: 'Ab Minor (Melodic)' },
     { value: 'scheme_MinorMelodic_G', label: 'G Minor (Melodic)' }
   ],
-  Others: [
+  'Others': [
     { value: 'scheme_Angry', label: 'Angry Mode' },
+    { value: 'scheme_Mysterious', label: 'Mysterious Mode' },
     { value: 'scheme_Nature', label: 'Nature Mode' }
   ]
 };

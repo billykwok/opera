@@ -1,8 +1,8 @@
 /* eslint quote-props: ["error", "consistent"] */
 
-// Major Scale
-// 2-2-1-2-2-2-1
-// C D E F G A B C
+// Melodic Minor Scale
+// 2-1-2-2-2-2-1
+// C D Eb F G A B C
 
 export default {
   'a': { instrument: 'piano', note: 'db4' },
@@ -98,5 +98,9 @@ export default {
   '6': { instrument: 'fluteorgan', note: 'f3' },
   '7': { instrument: 'fluteorgan', note: 'gb2' },
   '8': { instrument: 'fluteorgan', note: 'ab2' },
-  '9': { instrument: 'fluteorgan', note: 'a2' }
+  '9': { instrument: 'fluteorgan', note: 'a2' },
+
+  's1': { instrument: 'swell', note: 'gb3' },
+  's2': { instrument: 'swell', note: 'db3' },
+  's3': { instrument: 'swell', note: 'a3' }
 };
